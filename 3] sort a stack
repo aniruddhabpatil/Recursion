@@ -1,0 +1,46 @@
+// https://practice.geeksforgeeks.org/problems/sort-a-stack/1
+
+Input:
+Stack: 11 2 32 3 41
+Output: 41 32 11 3 2
+
+
+*The structure of the class is
+class SortedStack{
+public:
+	stack<int> s;
+	void sort();
+};
+*/
+
+/* The below method sorts the stack s 
+you are required to complete the below method */
+void insert(stack<int>& stk, int temp)
+{
+	if(stk.size()==0 || stk.top()<=temp)
+	{
+		stk.push(temp);
+		return ;
+	}
+	int x = stk.top();
+	stk.pop();
+	insert(stk,temp);
+	stk.push(x);
+}
+
+void sortstk(stack<int>& stk)
+{
+	if(stk.size()==1)
+		return;
+	int temp = stk.top();
+	stk.pop();
+	sortstk(stk);
+	insert(stk,temp);
+}
+
+
+void SortedStack :: sort()
+{
+   //Your code here
+   sortstk(SortedStack :: s);
+}
